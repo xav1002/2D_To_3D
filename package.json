@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/xav1002/2D_To_3D.git"
   },
+  "engines": {
+    "node": "10.16.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
