@@ -1,22 +1,31 @@
-const create3DCanvas = function() {
-    scene = new THREE.Scene();
+class topCanvas{
+    constructor() {
+        this.scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 10000);
-    scene.add(camera);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/ (window.innerHeight / 2), 0.1, 10000);
+        this.scene.add(this.camera);
 
-    light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(0, 10, -10);
-    scene.add(light);
+        this.light = new THREE.AmbientLight(0xffffff, 5);
+        this.scene.add(this.light);
 
-    cube = new THREE.Mesh(new THREE.CubeGeometry(5, 5, 5), new THREE.MeshPhongMaterial({color: 'blue'}));
-    cube.position.set(0, 0, -10);
-    scene.add(cube);
+        this.cube = new THREE.Mesh(new THREE.CubeGeometry(1, 1, 1), new THREE.MeshPhongMaterial({color: 'blue'}));
+        this.cube.position.set(0, 0, -10);
+        this.scene.add(this.cube);
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight / 2);
-    document.body.appendChild(renderer.domElement);
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize(window.innerWidth, window.innerHeight / 2);
+        this.renderer.setClearColor('rgb(100, 100, 100)');
+        document.body.appendChild(this.renderer.domElement);
 
-    console.log(light, cube);
+        this.animate();
+    }
+
+    animate() {
+        const topCanvas = this;
+        requestAnimationFrame(function() {topCanvas.animate()} );
+
+        topCanvas.renderer.render(topCanvas.scene, topCanvas.camera);
+    }
 }
 
-export default create3DCanvas;
+export default topCanvas;
