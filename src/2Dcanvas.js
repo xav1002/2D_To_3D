@@ -30,7 +30,7 @@ class CANVAS {
                 this.object.style.position = 'absolute';
                 this.object.style.display = 'block';
                 // Quick fix for positioning of divs; they need to be more centered with the canvas
-                this.object.style.left = `${5 + x}px`;
+                this.object.style.left = `${x}px`;
                 this.object.style.top = `${10 + a.canvas.height + y}px`;
                 this.object.style.backgroundColor = 'blue';
                 this.object.style.opacity = .2;
