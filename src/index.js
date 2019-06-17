@@ -6,9 +6,12 @@ var THREECanvas = new topCanvas();
 var Canvas = new CANVAS();
 
 console.log(THREECanvas.camera);
-console.log(Canvas.svg);
+console.log(Canvas.canvas);
+// console.log(Canvas.gamePieces);
 
-var testSVG = document.createElement('svg');
-testSVG.height = 100;
-testSVG.width = 100;
-document.body.appendChild(testSVG);
+Canvas.gamePieces.forEach(piece => {
+    piece.object.addEventListener('mouseover', function(e) {
+        console.log(e, this.style.left);
+        THREECanvas.rightCylinderMesh.position.x = (e.x - (window.innerHeight / 2)) / 5;
+    });
+});
