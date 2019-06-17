@@ -1,16 +1,15 @@
-class SVG {
+class CANVAS {
     constructor() {
-        this.svg = document.createElement('svg');
-        this.svg.id = 'svg';
-        this.svg.width = window.innerWidth;
-        this.svg.height = window.innerHeight / 2;
-        document.body.appendChild(this.svg);
+        this.canvas = document.createElement('canvas');
+        this.canvas.setAttribute('id', 'mainsvg');
+        this.canvas.setAttribute('height', `${window.innerHeight / 2}`);
+        this.canvas.setAttribute('width', `${window.innerWidth}`);
+        document.body.appendChild(this.canvas);
 
-        const a = this;
-        this.rectangles = [
-            a.horizontalRect = [],
-            a.verticalRect = []
-        ];
+        this.ctx = this.canvas.getContext('2d');
+
+        this.horizontalRect = [];
+        this.verticalRect = [];
 
         this.init();
     }
@@ -18,11 +17,26 @@ class SVG {
     init() {
         const a = this;
 
-        for(var i = 0; i < 20; i += 1) {
-            a.horizontalRect.push(document.createElement('rect'));
-            a.horizontalRect[i].position
+        class gamePeice {
+            constructor(x, y) {
+                this.width = a.canvas.width / 20;
+                this.height = a.canvas.height / 10;
+                a.ctx.rect(x, y, this.width, this.height);
+                a.ctx.stroke();
+            }
         }
+        
+        for(var i = 0; i < 10; i += 1) {
+            for(var j = 0; j < 20; j += 1) {
+                a.verticalRect.push(new gamePeice(j * a.canvas.width / 20, i * a.canvas.height / 10));
+            }
+        }
+
+        console.log(a.verticalRect);
+
+
+
     }
 }
 
-export default SVG;
+export default CANVAS;

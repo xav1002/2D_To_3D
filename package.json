@@ -1,11 +1,10 @@
 {
-  "name": "2D_To_3D",
+  "name": "2d_to_3d",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "node index.html"
+    "build": "webpack --mode development"
   },
   "repository": {
     "type": "git",
