@@ -14,6 +14,7 @@ Canvas.gamePieces.forEach(piece => {
         console.log(e);
         console.table(e.x, e.fromElement.offsetLeft, e.clientX, e.screenX, parseFloat(this.style.width));
         THREECanvas.rightCylinderMesh.position.x = (((Math.abs(parseFloat(this.style.left) - (Canvas.canvas.width / 2))) * 2) + (THREECanvas.tubeLength / 8));
+        THREECanvas.rightCylinderMesh.position.y = 5;
         console.log(parseFloat(this.style.left), Canvas.canvas.width / 2, THREECanvas.rightCylinderMesh.position.x);
         THREECanvas.leftCylinderMesh.position.x = -(((Math.abs(parseFloat(this.style.left) - (Canvas.canvas.width / 2))) * 2) + (THREECanvas.tubeLength / 8));
     });

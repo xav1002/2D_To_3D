@@ -4,7 +4,7 @@ class CANVAS {
         this.canvas.setAttribute('id', 'mainsvg');
         this.canvas.setAttribute('height', `${window.innerHeight / 2}`);
         this.canvas.setAttribute('width', `${window.innerWidth}`);
-        this.canvas.style.position = 'relative';
+        this.canvas.style.position = 'absolute';
         document.body.appendChild(this.canvas);
 
         this.ctx = this.canvas.getContext('2d');
@@ -31,7 +31,7 @@ class CANVAS {
                 this.object.style.display = 'block';
                 // Quick fix for positioning of divs; they need to be more centered with the canvas
                 this.object.style.left = `${x}px`;
-                this.object.style.top = `${10 + a.canvas.height + y}px`;
+                this.object.style.top = `${window.innerHeight / 2 + y}px`;
                 this.object.style.backgroundColor = 'blue';
                 this.object.style.opacity = .2;
                 document.body.appendChild(this.object);
