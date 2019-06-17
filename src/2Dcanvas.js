@@ -8,7 +8,6 @@ class CANVAS {
         document.body.appendChild(this.canvas);
 
         this.ctx = this.canvas.getContext('2d');
-
         this.gamePieces = [];
 
         this.init();
@@ -43,11 +42,6 @@ class CANVAS {
                 a.gamePieces.push(new gamePiece(j * a.canvas.width / 20, i * a.canvas.height / 10));
             }
         }
-
-        // console.log(a.gamePieces);
-
-
-
     }
 }
 

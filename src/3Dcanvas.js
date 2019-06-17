@@ -31,7 +31,7 @@ class topCanvas{
         customCurve.prototype.getPoint = function ( t ) {
         
             var tx = t * 5 - 2.5;
-            var ty = Math.cos(t);
+            var ty = 0;
             var tz = 0;
         
             return new THREE.Vector3( tx, ty, tz ).multiplyScalar( this.scale );
