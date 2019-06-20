@@ -22,6 +22,14 @@ class topCanvas{
         this.pointLight.position.set(5, 5, 5);
         this.scene.add(this.pointLight);
 
+        const topCanvas = this;
+
+        /**
+         * 
+         * @param {number} scale 
+         * determines the path that the tube will take
+         */
+
         function customCurve( scale ) {
 
             THREE.Curve.call( this );
@@ -35,11 +43,12 @@ class topCanvas{
         
         customCurve.prototype.getPoint = function ( t ) {
         
-            var tx = t * 5 - 2.5;
-            var ty = Math.cos(t);
-            var tz = 0;
+            topCanvas.tx = t * 5 - 2.5;
+            topCanvas.ty = Math.cos(t);
+            // console.log(topCanvas.ty, t);
+            topCanvas.tz = 0;
         
-            return new THREE.Vector3( tx, ty, tz ).multiplyScalar( this.scale );
+            return new THREE.Vector3( topCanvas.tx, topCanvas.ty, topCanvas.tz ).multiplyScalar( this.scale );
         
         };
 
