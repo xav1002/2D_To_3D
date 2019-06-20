@@ -1,3 +1,8 @@
+/**
+ * creates the bottom (2D) canvas of the app
+ * each grid is a rectangle drawn on the canvas, with a div corresponding to each rectangle
+ */
+
 class CANVAS {
     constructor() {
         this.canvas = document.createElement('canvas');

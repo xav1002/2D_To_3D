@@ -1,3 +1,8 @@
+/**
+ * creates the top (3D) canvas in the app
+ * also creates the tube and the sliding cylinders
+ */
+
 class topCanvas{
     constructor() {
         this.scene = new THREE.Scene();
@@ -69,6 +74,10 @@ class topCanvas{
 
         this.animate();
     }
+
+    /**
+     * this is the animate function
+     */
 
     animate() {
         const topCanvas = this;

@@ -9,6 +9,7 @@ console.log(THREECanvas.camera);
 console.log(Canvas.canvas);
 // console.log(Canvas.gamePieces);
 
+
 Canvas.gamePieces.forEach(piece => {
     piece.object.addEventListener('mouseover', function(e) {
         console.log(e);
