@@ -13,28 +13,40 @@ console.log(Canvas.canvas);
  */
 
 Canvas.canvas.addEventListener('mousemove', function(e) {
-    var offset = e.offsetX / (Canvas.canvas.width / 20);
+    var offset = Math.ceil(e.offsetX / (Canvas.canvas.width / 20));
     // console.log(Math.ceil(offset));
-    console.log(THREECanvas.rightCylinderMesh.position.y);
+    // console.table(THREECanvas.rightCylinderMesh.position.y, THREECanvas.leftCylinderMesh.position.y);
 
     var newOffset = offset;
-    if(Math.ceil(offset) >= 11) {
-        newOffset += 1;
-        THREECanvas.rightCylinderMesh.position.x = ((Math.abs(Math.ceil(newOffset) - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
-        THREECanvas.leftCylinderMesh.position.x = -((Math.abs(Math.ceil(newOffset) - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
-    } else {
-        THREECanvas.rightCylinderMesh.position.x = ((Math.abs(Math.ceil(offset) - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
-        THREECanvas.leftCylinderMesh.position.x = -((Math.abs(Math.ceil(offset) - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
-    }
+    // if(offset >= 11) {
+    //     newOffset += 1;
+    //     THREECanvas.rightCylinderMesh.position.x = ((Math.abs(newOffset - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
+    //     THREECanvas.leftCylinderMesh.position.x = -((Math.abs(newOffset - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
+    // } else {
+    //     THREECanvas.rightCylinderMesh.position.x = ((Math.abs(offset - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
+    //     THREECanvas.leftCylinderMesh.position.x = -((Math.abs(offset - 11) * THREECanvas.tubeLength / 4) - THREECanvas.tubeLength / 8);
+    // }
 
-    if(Math.ceil(offset) <= 9) {
+    if(offset <= 9) {
         newOffset = 19 - offset;
-        THREECanvas.rightCylinderMesh.position.y = THREECanvas.path.getPoints(19)[Math.ceil(newOffset)].y;
-        THREECanvas.leftCylinderMesh.position.y = THREECanvas.path.getPoints(19)[Math.ceil(offset)].y;
+        offset -= 1;
+        newOffset += 1;
+        THREECanvas.rightCylinderMesh.position.y = THREECanvas.path.getPoints(19)[newOffset].y;
+        THREECanvas.leftCylinderMesh.position.y = THREECanvas.path.getPoints(19)[offset].y;
+        THREECanvas.rightCylinderMesh.position.x = THREECanvas.path.getPoints(19)[newOffset].x;
+        THREECanvas.leftCylinderMesh.position.x = THREECanvas.path.getPoints(19)[offset].x;
+        // console.table(THREECanvas.rightCylinderMesh.position.y, THREECanvas.leftCylinderMesh.position.y, offset, newOffset);
     } else {
         newOffset = 19 - offset;
-        THREECanvas.rightCylinderMesh.position.y = THREECanvas.path.getPoints(19)[Math.ceil(offset - 1)].y;
-        THREECanvas.leftCylinderMesh.position.y = THREECanvas.path.getPoints(19)[Math.ceil(newOffset)].y;
+        if(offset >= 11) {
+            offset -= 1;
+            newOffset += 1;
+        }
+        THREECanvas.rightCylinderMesh.position.y = THREECanvas.path.getPoints(19)[offset].y;
+        THREECanvas.leftCylinderMesh.position.y = THREECanvas.path.getPoints(19)[newOffset].y;
+        THREECanvas.rightCylinderMesh.position.x = THREECanvas.path.getPoints(19)[offset].x;
+        THREECanvas.leftCylinderMesh.position.x = THREECanvas.path.getPoints(19)[newOffset].x;
+        // console.table(THREECanvas.rightCylinderMesh.position.y, THREECanvas.leftCylinderMesh.position.y, offset, newOffset);
     }
 });
 

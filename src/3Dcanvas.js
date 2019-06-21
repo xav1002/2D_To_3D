@@ -1,6 +1,7 @@
 /**
  * creates the top (3D) canvas in the app
  * also creates the tube and the sliding cylinders
+ * having a bit of trouble with the x-axis positioning based on the curve; needs a ratio to make it more fitting
  */
 
 class topCanvas{
@@ -52,7 +53,7 @@ class topCanvas{
         
         };
 
-        this.tubeLength = parseFloat(this.renderer.domElement.style.width) / 2.5;
+        this.tubeLength = parseFloat(this.renderer.domElement.style.width) / 2.7;
         this.path = new customCurve(this.tubeLength);
         console.log(this.tubeLength / 4);
         this.tubeGeo = new THREE.TubeGeometry(this.path, 20, this.tubeLength / 8, 8, false);
@@ -67,11 +68,12 @@ class topCanvas{
         this.rightCylinderMesh = new THREE.Mesh(this.cylinderGeo, this.cylinderMat);
         this.leftCylinderMesh = new THREE.Mesh(this.cylinderGeo, new THREE.MeshPhongMaterial({color: 'red'}));
         this.rightCylinderMesh.position.z = -1000;
-        this.rightCylinderMesh.position.x = this.tubeLength / 8;
-        this.rightCylinderMesh.position.y = this.path.getPoints(20)[10].y;
-        console.table(this.path.getPoints(20)[10]);
+        this.rightCylinderMesh.position.x = this.path.getPoints(19)[10].x;
+        this.rightCylinderMesh.position.y = this.path.getPoints(19)[10].y;
         this.leftCylinderMesh.position.z = -1000;
-        this.leftCylinderMesh.position.x = -this.tubeLength / 8;
+        this.leftCylinderMesh.position.x = this.path.getPoints(19)[9].x;
+        // -this.tubeLength / 8;
+        this.leftCylinderMesh.position.y = this.path.getPoints(19)[9].y;
         this.rightCylinderMesh.rotation.z = Math.PI / 2;
         this.leftCylinderMesh.rotation.z = Math.PI / 2;
         this.scene.add(this.rightCylinderMesh, this.leftCylinderMesh);
