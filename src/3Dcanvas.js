@@ -68,6 +68,8 @@ class topCanvas{
         this.leftCylinderMesh = new THREE.Mesh(this.cylinderGeo, new THREE.MeshPhongMaterial({color: 'red'}));
         this.rightCylinderMesh.position.z = -1000;
         this.rightCylinderMesh.position.x = this.tubeLength / 8;
+        this.rightCylinderMesh.position.y = this.path.getPoints(20)[10].y;
+        console.table(this.path.getPoints(20)[10]);
         this.leftCylinderMesh.position.z = -1000;
         this.leftCylinderMesh.position.x = -this.tubeLength / 8;
         this.rightCylinderMesh.rotation.z = Math.PI / 2;
