@@ -72,16 +72,26 @@ class topCanvas{
         this.cylinderMat = new THREE.MeshPhongMaterial({color: 'green'});
         this.rightCylinderMesh = new THREE.Mesh(this.cylinderGeo, this.cylinderMat);
         this.leftCylinderMesh = new THREE.Mesh(this.cylinderGeo, new THREE.MeshPhongMaterial({color: 'red'}));
+
+        this.rightCylinderRotationZ = Math.atan((this.path.getPoints(19)[10].y - this.path.getPoints(19)[9].y) / (this.path.getPoints(19)[10].x - this.path.getPoints(19)[9].x)) + Math.PI / 2;
+        this.rightCylinderRotationY = Math.atan((this.path.getPoints(19)[10].z - this.path.getPoints(19)[9].z) / (this.path.getPoints(19)[10].x - this.path.getPoints(19)[9].x)) + Math.PI / 2;
         this.rightCylinderMesh.position.z = -(this.path.getPoints(19)[9].z);
         this.rightCylinderMesh.position.x = this.path.getPoints(19)[10].x;
         this.rightCylinderMesh.position.y = this.path.getPoints(19)[10].y;
+
+        this.leftCylinderRotationZ = Math.atan((this.path.getPoints(19)[9].y - this.path.getPoints(19)[8].y) / (this.path.getPoints(19)[9].x - this.path.getPoints(19)[8].x)) + Math.PI / 2;
+        this.leftCylinderRotationY = Math.atan((this.path.getPoints(19)[9].z - this.path.getPoints(19)[8].z) / (this.path.getPoints(19)[9].x - this.path.getPoints(19)[8].x)) + Math.PI / 2;
         this.leftCylinderMesh.position.z = -(this.path.getPoints(19)[10].z);
         this.leftCylinderMesh.position.x = this.path.getPoints(19)[9].x;
         // Old way of defining the positions of the cylinders
         // -this.tubeLength / 8;
         this.leftCylinderMesh.position.y = this.path.getPoints(19)[9].y;
-        this.rightCylinderMesh.rotation.z = Math.PI / 2;
-        this.leftCylinderMesh.rotation.z = Math.PI / 2;
+    
+        this.rightCylinderMesh.rotation.z = this.rightCylinderRotationZ;
+        this.rightCylinderMesh.rotation.y = this.rightCylinderRotationY;
+        this.leftCylinderMesh.rotation.z = this.leftCylinderRotationZ;
+        this.leftCylinderMesh.rotation.y = this.leftCylinderRotationY;
+
         this.scene.add(this.rightCylinderMesh, this.leftCylinderMesh);
 
         this.animate();

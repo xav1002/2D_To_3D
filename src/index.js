@@ -16,7 +16,7 @@ Canvas.canvas.addEventListener('mousemove', function(e) {
     var newOffset = offset;
 
     /**
-     * This method uses the offset and the length of the tube to change the position of the cylinders; this is more proportional than the other method
+     * This method uses the offset and the length of the tube to change the position of the cylinders; THREECanvas is more proportional than the other method
      */
 
     // if(offset >= 11) {
@@ -42,6 +42,12 @@ Canvas.canvas.addEventListener('mousemove', function(e) {
         THREECanvas.leftCylinderMesh.position.x = THREECanvas.path.getPoints(19)[offset].x;
         THREECanvas.rightCylinderMesh.position.z = -(THREECanvas.path.getPoints(19)[offset].z);
         THREECanvas.leftCylinderMesh.position.z = -(THREECanvas.path.getPoints(19)[newOffset].z);
+        if(offset <= 1 || newOffset >= 18) {
+            offset += 1;
+            newOffset -= 1;
+        }
+        THREECanvas.rightCylinderMesh.rotation.z = Math.atan(((THREECanvas.path.getPoints(19)[newOffset].y - THREECanvas.path.getPoints(19)[newOffset - 1].y) / (THREECanvas.path.getPoints(19)[newOffset].x - THREECanvas.path.getPoints(19)[newOffset - 1].x))) - (Math.PI / 2);
+        THREECanvas.leftCylinderMesh.rotation.z = Math.atan(((THREECanvas.path.getPoints(19)[offset].y - THREECanvas.path.getPoints(19)[offset - 1].y) / (THREECanvas.path.getPoints(19)[offset].x - THREECanvas.path.getPoints(19)[offset - 1].x))) - (Math.PI / 2);
     } else {
         newOffset = 19 - offset;
         if(offset >= 11) {
@@ -54,6 +60,13 @@ Canvas.canvas.addEventListener('mousemove', function(e) {
         THREECanvas.leftCylinderMesh.position.x = THREECanvas.path.getPoints(19)[newOffset].x;
         THREECanvas.rightCylinderMesh.position.z = -(THREECanvas.path.getPoints(19)[newOffset].z);
         THREECanvas.leftCylinderMesh.position.z = -(THREECanvas.path.getPoints(19)[offset].z);
+        if(offset >= 18 || newOffset <= 1) {
+            offset -= 1;
+            newOffset += 1;
+        }
+        THREECanvas.rightCylinderMesh.rotation.z = Math.atan(((THREECanvas.path.getPoints(19)[offset].y - THREECanvas.path.getPoints(19)[offset - 1].y) / (THREECanvas.path.getPoints(19)[offset].x - THREECanvas.path.getPoints(19)[offset - 1].x))) - (Math.PI / 2);
+        THREECanvas.leftCylinderMesh.rotation.z = Math.atan(((THREECanvas.path.getPoints(19)[newOffset].y - THREECanvas.path.getPoints(19)[newOffset - 1].y) / (THREECanvas.path.getPoints(19)[newOffset].x - THREECanvas.path.getPoints(19)[newOffset - 1].x))) - (Math.PI / 2);
+
     }
-    console.log(offset, newOffset, THREECanvas.rightCylinderMesh.position.z, THREECanvas.leftCylinderMesh.position.z);
+    console.log(offset, newOffset, THREECanvas.rightCylinderMesh.rotation.z);
 });
