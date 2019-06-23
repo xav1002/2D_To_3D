@@ -8,7 +8,16 @@ class topCanvas{
     constructor() {
         this.scene = new THREE.Scene();
 
-        this.camera = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, 1, 1000);
+        this.camera = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight / 2, -window.innerHeight / 2, 1, 100000);
+
+        // this.camera.position.set(0, 2000, 0);
+        // this.camera.rotation.x = -Math.PI / 2;
+
+        this.camera.position.set(0, 0, 2000);
+
+        // this.camera.position.set(0, 2000, 2000);
+        // this.camera.rotation.x = -Math.PI / 4;
+
         this.scene.add(this.camera);
 
         this.renderer = new THREE.WebGLRenderer();
@@ -45,9 +54,8 @@ class topCanvas{
         customCurve.prototype.getPoint = function ( t ) {
         
             topCanvas.tx = t * 5 - 2.5;
-            topCanvas.ty = Math.cos(t);
-            // console.log(topCanvas.ty, t);
-            topCanvas.tz = 0;
+            topCanvas.ty = t * t * t;
+            topCanvas.tz = -4 * t + 2;
         
             return new THREE.Vector3( topCanvas.tx, topCanvas.ty, topCanvas.tz ).multiplyScalar( this.scale );
         
@@ -55,35 +63,26 @@ class topCanvas{
 
         this.tubeLength = parseFloat(this.renderer.domElement.style.width) / 2.7;
         this.path = new customCurve(this.tubeLength);
-        console.log(this.tubeLength / 4);
         this.tubeGeo = new THREE.TubeGeometry(this.path, 20, this.tubeLength / 8, 8, false);
         this.tubeMat = new THREE.MeshPhongMaterial({color: 'blue'});
         this.tubeMesh = new THREE.Mesh(this.tubeGeo, this.tubeMat);
-        this.tubeMesh.position.z = -1000;
-        console.log(this.tubeMesh);
         this.scene.add(this.tubeMesh);
 
-        this.cylinderGeo = new THREE.CylinderGeometry(this.tubeLength / 5, this.tubeLength / 5, this.tubeLength / 4, 100);
+        this.cylinderGeo = new THREE.CylinderGeometry(this.tubeLength / 5, this.tubeLength / 5, this.tubeLength / 5, 100);
         this.cylinderMat = new THREE.MeshPhongMaterial({color: 'green'});
         this.rightCylinderMesh = new THREE.Mesh(this.cylinderGeo, this.cylinderMat);
         this.leftCylinderMesh = new THREE.Mesh(this.cylinderGeo, new THREE.MeshPhongMaterial({color: 'red'}));
-        this.rightCylinderMesh.position.z = -1000;
+        this.rightCylinderMesh.position.z = -(this.path.getPoints(19)[9].z);
         this.rightCylinderMesh.position.x = this.path.getPoints(19)[10].x;
         this.rightCylinderMesh.position.y = this.path.getPoints(19)[10].y;
-        this.leftCylinderMesh.position.z = -1000;
+        this.leftCylinderMesh.position.z = -(this.path.getPoints(19)[10].z);
         this.leftCylinderMesh.position.x = this.path.getPoints(19)[9].x;
+        // Old way of defining the positions of the cylinders
         // -this.tubeLength / 8;
         this.leftCylinderMesh.position.y = this.path.getPoints(19)[9].y;
         this.rightCylinderMesh.rotation.z = Math.PI / 2;
         this.leftCylinderMesh.rotation.z = Math.PI / 2;
         this.scene.add(this.rightCylinderMesh, this.leftCylinderMesh);
-
-        // this.ringGeo = new THREE.CylinderGeometry(this.tubeLength / 7, this.tubeLength / 7, this.tubeLength / 20, 100);
-        // this.ringMesh = new THREE.Mesh(this.ringGeo, this.cylinderMat);
-        // this.ringMesh.position.x = this.tubeLength * 5 / 2;
-        // this.ringMesh.position.z = -1000;
-        // this.ringMesh.rotation.z = Math.PI / 2;
-        // this.scene.add(this.ringMesh);
 
         this.animate();
     }
