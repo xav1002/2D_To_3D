@@ -53,8 +53,8 @@ class topCanvas{
         
         customCurve.prototype.getPoint = function ( t ) {
         
-            topCanvas.tx = t * 5 - 2.5;
-            topCanvas.ty = t * t * t;
+            topCanvas.tx = t * 3 - 1.5;
+            topCanvas.ty = -t * t + t;
             topCanvas.tz = -4 * t + 2;
         
             return new THREE.Vector3( topCanvas.tx, topCanvas.ty, topCanvas.tz ).multiplyScalar( this.scale );
